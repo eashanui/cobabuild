@@ -1,0 +1,1 @@
+var e=`/cobabuild/assets/hero-cocopeat-CEG0Whd4.jpg`;export{e as t};

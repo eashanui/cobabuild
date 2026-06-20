@@ -1,0 +1,1 @@
+import{o as e}from"./useStore-DsC52wh1.js";import{t}from"./link-B_56d34B.js";var n=e(),r=()=>(0,n.jsxs)(`div`,{className:`container-wide py-32 text-center`,children:[(0,n.jsx)(`h1`,{className:`font-serif text-3xl`,children:`Post not found`}),(0,n.jsx)(t,{to:`/blog`,className:`mt-4 inline-block text-accent`,children:`← Back to blog`})]});export{r as notFoundComponent};

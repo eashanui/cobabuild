@@ -1,0 +1,1 @@
+var e=`/cobabuild/assets/grow-bags-DCcQ-IPh.jpg`;export{e as t};
