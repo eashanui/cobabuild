@@ -1,1 +1,0 @@
-var e=`/assets/product-blocks-DXyjEIjS.jpg`;export{e as t};

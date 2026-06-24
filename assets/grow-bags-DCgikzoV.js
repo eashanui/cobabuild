@@ -1,1 +1,0 @@
-var e=`/assets/grow-bags-DCcQ-IPh.jpg`;export{e as t};
