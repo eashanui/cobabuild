@@ -1,1 +1,0 @@
-var e=`/cobabuild/assets/product-husk-DgSXzXBS.jpg`,t=`/cobabuild/assets/product-fibre-Ddd5Is72.jpg`,n=`/cobabuild/assets/product-growbag-BNB74bPA.jpg`;export{t as n,e as r,n as t};

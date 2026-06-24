@@ -1,1 +1,0 @@
-var e=`/cobabuild/assets/factory-Bi9jBgh9.jpg`;export{e as t};
