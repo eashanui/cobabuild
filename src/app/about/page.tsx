@@ -1,24 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import Image from "next/image";
 import { Wrench, Boxes, FlaskConical, Truck, Sprout } from "lucide-react";
 import factoryImg from "@/assets/factory.jpg";
 import { PageHero, CTASection } from "@/components/site/blocks";
 
-export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Coba Peat Lanka | 30+ Years of Coir Exporting" },
-      {
-        name: "description",
-        content:
-          "Founded in 1993, Coba Peat Lanka is a BOI-approved Sri Lankan manufacturer of coco peat and coir products with in-house QC, engineering and exporting capabilities.",
-      },
-      { property: "og:title", content: "About Coba Peat Lanka" },
-      { property: "og:url", content: "/about" },
-    ],
-    links: [{ rel: "canonical", href: "/about" }],
-  }),
-  component: AboutPage,
-});
+export const metadata: Metadata = {
+  title: "About | 30+ Years of Coir Exporting",
+  description:
+    "Founded in 1993, Coba Peat Lanka is a BOI-approved Sri Lankan manufacturer of coco peat and coir products with in-house QC, engineering and exporting capabilities.",
+  openGraph: { title: "About Coba Peat Lanka", url: "/about" },
+  alternates: { canonical: "/about" },
+};
 
 const facilities = [
   {
@@ -43,7 +35,7 @@ const facilities = [
   },
 ];
 
-function AboutPage() {
+export default function AboutPage() {
   return (
     <>
       <PageHero
@@ -55,10 +47,9 @@ function AboutPage() {
       {/* STORY */}
       <section className="section-y">
         <div className="container-wide grid lg:grid-cols-2 gap-14 items-center">
-          <img
+          <Image
             src={factoryImg}
             alt="Coba Peat Lanka factory"
-            loading="lazy"
             width={1280}
             height={896}
             className="rounded-2xl shadow-xl"
@@ -70,7 +61,7 @@ function AboutPage() {
             </h2>
             <div className="mt-6 space-y-5 text-muted-foreground text-lg">
               <p>
-                Coba Peat Lanka began in 1993 in Kurunegala, the heart of Sri Lanka's coconut
+                Coba Peat Lanka began in 1993 in Kurunegala, the heart of Sri Lanka&apos;s coconut
                 triangle. We started with a single processing line and a simple promise: deliver
                 coco peat that growers could actually rely on, shipment after shipment.
               </p>
@@ -82,7 +73,7 @@ function AboutPage() {
               </p>
               <p>
                 We are BOI-approved (Board of Investment of Sri Lanka), which means our exports
-                meet the country's most rigorous standards for foreign trade.
+                meet the country&apos;s most rigorous standards for foreign trade.
               </p>
             </div>
           </div>
@@ -104,7 +95,10 @@ function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 gap-5">
             {facilities.map((f) => (
-              <div key={f.title} className="flex gap-5 p-6 rounded-2xl bg-background border border-border">
+              <div
+                key={f.title}
+                className="flex gap-5 p-6 rounded-2xl bg-background border border-border"
+              >
                 <span className="grid place-items-center h-12 w-12 shrink-0 rounded-lg bg-primary/10 text-primary">
                   <f.icon className="h-6 w-6" />
                 </span>
@@ -128,8 +122,8 @@ function AboutPage() {
           <p className="mt-6 text-lg text-muted-foreground">
             We make products from what would otherwise be coconut waste turning by-products
             into a renewable growing medium that helps growers around the world produce more
-            food with less environmental impact. Sustainability isn't a marketing line for us;
-            it's the entire business model.
+            food with less environmental impact. Sustainability isn&apos;t a marketing line for us;
+            it&apos;s the entire business model.
           </p>
         </div>
       </section>

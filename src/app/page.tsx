@@ -1,13 +1,15 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import {
   CalendarCheck,
   ShieldCheck,
   Globe2,
   FlaskConical,
-  Leaf,
   Factory,
   Sprout,
   Recycle,
+  Leaf,
   Download,
   ArrowRight,
 } from "lucide-react";
@@ -21,27 +23,18 @@ import {
 } from "@/components/site/blocks";
 import { productCategoryGrid } from "@/lib/products";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Coba Peat Lanka Coco Peat & Coir Exporter from Sri Lanka" },
-      {
-        name: "description",
-        content:
-          "Since 1993, Coba Peat Lanka has been a trusted BOI-approved exporter of coco peat, grow bags, husk chips and coir products to Australia, Japan, UK, USA and France.",
-      },
-      { property: "og:title", content: "Coba Peat Lanka Nurturing Soil, Growing Futures" },
-      {
-        property: "og:description",
-        content:
-          "30+ years of premium coco peat and coir products from Sri Lanka. BOI-approved direct exporter.",
-      },
-      { property: "og:url", content: "/" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-  }),
-  component: HomePage,
-});
+export const metadata: Metadata = {
+  title: "Coba Peat Lanka | Coco Peat & Coir Exporter from Sri Lanka",
+  description:
+    "Since 1993, Coba Peat Lanka has been a trusted BOI-approved exporter of coco peat, grow bags, husk chips and coir products to Australia, Japan, UK, USA and France.",
+  openGraph: {
+    title: "Coba Peat Lanka | Nurturing Soil, Growing Futures",
+    description:
+      "30+ years of premium coco peat and coir products from Sri Lanka. BOI-approved direct exporter.",
+    url: "/",
+  },
+  alternates: { canonical: "/" },
+};
 
 const markets = [
   { code: "AU", name: "Australia", primary: true },
@@ -72,18 +65,18 @@ const testimonials = [
   },
 ];
 
-function HomePage() {
+export default function HomePage() {
   return (
     <>
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src={heroImg}
             alt="Coconut coir fibre and coco peat substrate"
-            width={1920}
-            height={1080}
-            className="h-full w-full object-cover"
+            fill
+            priority
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/30" />
         </div>
@@ -93,7 +86,8 @@ function HomePage() {
               <Leaf className="h-3.5 w-3.5 text-gold" /> Sri Lanka · Since 1993
             </span>
             <h1 className="mt-6 font-serif text-5xl md:text-7xl leading-[1.02] text-background">
-              Nurturing Soil,<br />
+              Nurturing Soil,
+              <br />
               <span className="text-gold">Growing Futures.</span>
             </h1>
             <p className="mt-6 text-lg md:text-xl text-background/85 max-w-xl">
@@ -102,13 +96,13 @@ function HomePage() {
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link
-                to="/contact"
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-6 py-3.5 text-sm font-semibold hover:brightness-105 transition shadow-lg"
               >
                 Get a Quote <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <Link
-                to="/downloads"
+                href="/downloads"
                 className="inline-flex items-center justify-center rounded-md bg-background/10 backdrop-blur border border-background/30 text-background px-6 py-3.5 text-sm font-semibold hover:bg-background/20 transition"
               >
                 <Download className="mr-2 h-4 w-4" /> Download Company Profile
@@ -135,11 +129,13 @@ function HomePage() {
             <div className="max-w-xl">
               <span className="eyebrow">Our Range</span>
               <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight">
-                Coco peat &amp; coir products,<br />engineered for serious growers.
+                Coco peat &amp; coir products,
+                <br />
+                engineered for serious growers.
               </h2>
             </div>
             <Link
-              to="/products"
+              href="/products"
               className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all"
             >
               See all products <ArrowRight className="h-4 w-4" />
@@ -157,10 +153,9 @@ function HomePage() {
       <section className="section-y bg-card border-y border-border">
         <div className="container-wide grid lg:grid-cols-2 gap-14 items-center">
           <div className="relative">
-            <img
+            <Image
               src={factoryImg}
               alt="Coco peat factory floor"
-              loading="lazy"
               width={1280}
               height={896}
               className="rounded-2xl shadow-xl"
@@ -240,10 +235,14 @@ function HomePage() {
                     : "bg-card border-border"
                 }`}
               >
-                <div className={`font-serif text-3xl ${m.primary ? "text-gold" : "text-primary"}`}>
+                <div
+                  className={`font-serif text-3xl ${m.primary ? "text-gold" : "text-primary"}`}
+                >
                   {m.code}
                 </div>
-                <div className={`mt-2 text-sm ${m.primary ? "text-primary-foreground/85" : "text-muted-foreground"}`}>
+                <div
+                  className={`mt-2 text-sm ${m.primary ? "text-primary-foreground/85" : "text-muted-foreground"}`}
+                >
                   {m.name}
                 </div>
                 {m.primary && (
@@ -255,7 +254,7 @@ function HomePage() {
             ))}
           </div>
           <Link
-            to="/export"
+            href="/export"
             className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:gap-3 transition-all"
           >
             Explore export logistics <ArrowRight className="h-4 w-4" />
