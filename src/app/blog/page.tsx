@@ -1,20 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
 import { PageHero } from "@/components/site/blocks";
 import { posts } from "@/lib/posts";
 
-export const Route = createFileRoute("/blog/")({
-  head: () => ({
-    meta: [
-      { title: "Blog & News Coba Peat Lanka" },
-      { name: "description", content: "Insights, market updates and growing tips from a 30-year coco peat exporter." },
-      { property: "og:url", content: "/blog" },
-    ],
-    links: [{ rel: "canonical", href: "/blog" }],
-  }),
-  component: BlogIndex,
-});
+export const metadata: Metadata = {
+  title: "Blog & News",
+  description: "Insights, market updates and growing tips from a 30-year coco peat exporter.",
+  openGraph: { url: "/blog" },
+  alternates: { canonical: "/blog" },
+};
 
-function BlogIndex() {
+export default function BlogIndex() {
   return (
     <>
       <PageHero
@@ -27,16 +24,24 @@ function BlogIndex() {
           {posts.map((p) => (
             <Link
               key={p.slug}
-              to="/blog/$slug"
-              params={{ slug: p.slug }}
+              href={`/blog/${p.slug}`}
               className="group rounded-2xl overflow-hidden bg-card border border-border hover:shadow-xl transition"
             >
-              <div className="aspect-[16/10] overflow-hidden">
-                <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-cover group-hover:scale-105 transition duration-500" />
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <Image
+                  src={p.image}
+                  alt={p.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition duration-500"
+                />
               </div>
               <div className="p-6">
                 <time className="text-xs uppercase tracking-wider text-muted-foreground">
-                  {new Date(p.date).toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" })}
+                  {new Date(p.date).toLocaleDateString("en-GB", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
                 </time>
                 <h2 className="mt-2 font-serif text-xl leading-snug group-hover:text-primary transition">
                   {p.title}

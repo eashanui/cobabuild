@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
 import { Leaf, Mail, Phone, MapPin, Facebook, Linkedin, Instagram } from "lucide-react";
 
 export function Footer() {
@@ -49,7 +49,7 @@ export function Footer() {
               { to: "/downloads", label: "Downloads" },
             ].map((l) => (
               <li key={l.to}>
-                <Link to={l.to} className="hover:text-accent transition-colors">
+                <Link href={l.to} className="hover:text-accent transition-colors">
                   {l.label}
                 </Link>
               </li>
@@ -62,7 +62,9 @@ export function Footer() {
           <address className="not-italic text-sm space-y-3 text-background/75">
             <p className="flex gap-2.5">
               <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-accent" />
-              410/99, Bullers Road,<br />Colombo 07, Sri Lanka
+              410/99, Bullers Road,
+              <br />
+              Colombo 07, Sri Lanka
             </p>
             <p className="flex gap-2.5">
               <Phone className="h-4 w-4 shrink-0 mt-0.5 text-accent" />
@@ -80,11 +82,13 @@ export function Footer() {
           <address className="not-italic text-sm space-y-3 text-background/75">
             <p className="flex gap-2.5">
               <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-accent" />
-              Dangaspitiya Industrial Park,<br />Kohilagedara, Kurunegala
+              Dangaspitiya Industrial Park,
+              <br />
+              Kohilagedara, Kurunegala
             </p>
           </address>
           <Link
-            to="/contact"
+            href="/contact"
             className="mt-6 inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-4 py-2.5 text-sm font-semibold hover:brightness-105 transition"
           >
             Request a Quote

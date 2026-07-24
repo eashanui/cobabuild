@@ -1,24 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { Metadata } from "next";
 import { Ship, CalendarDays, FileText, Globe2 } from "lucide-react";
 import { PageHero, CTASection } from "@/components/site/blocks";
 
-export const Route = createFileRoute("/export")({
-  head: () => ({
-    meta: [
-      { title: "Export to Australia & Worldwide Coba Peat Lanka" },
-      {
-        name: "description",
-        content:
-          "Direct coco peat exports from Sri Lanka to Australia, Japan, UK, USA and France. FCL 20'/40' shipments, fortnightly Australia sailings, AQIS-compliant.",
-      },
-      { property: "og:url", content: "/export" },
-    ],
-    links: [{ rel: "canonical", href: "/export" }],
-  }),
-  component: ExportPage,
-});
+export const metadata: Metadata = {
+  title: "Export to Australia & Worldwide",
+  description:
+    "Direct coco peat exports from Sri Lanka to Australia, Japan, UK, USA and France. FCL 20'/40' shipments, fortnightly Australia sailings, AQIS-compliant.",
+  openGraph: { url: "/export" },
+  alternates: { canonical: "/export" },
+};
 
-function ExportPage() {
+export default function ExportPage() {
   return (
     <>
       <PageHero
@@ -42,19 +34,28 @@ function ExportPage() {
                 <p className="mt-5 text-primary-foreground/80 text-lg">
                   Decades of AQIS-compliant shipments, predictable lead times, and full
                   documentation. We know what Australian biosecurity needs to see because
-                  we've been sending it since 1993.
+                  we&apos;ve been sending it since 1993.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { icon: Ship, label: "Sailings", value: "Fortnightly to Melbourne, Sydney, Brisbane, Fremantle" },
+                  {
+                    icon: Ship,
+                    label: "Sailings",
+                    value: "Fortnightly to Melbourne, Sydney, Brisbane, Fremantle",
+                  },
                   { icon: CalendarDays, label: "Lead time", value: "21–28 days port-to-port" },
                   { icon: FileText, label: "Incoterms", value: "FOB, CIF, CFR" },
                   { icon: Globe2, label: "Container", value: "20' FCL & 40' HC" },
                 ].map((d) => (
-                  <div key={d.label} className="p-5 rounded-xl bg-primary-foreground/10 border border-primary-foreground/15">
+                  <div
+                    key={d.label}
+                    className="p-5 rounded-xl bg-primary-foreground/10 border border-primary-foreground/15"
+                  >
                     <d.icon className="h-5 w-5 text-gold" />
-                    <div className="mt-2 text-xs uppercase tracking-wider text-primary-foreground/60">{d.label}</div>
+                    <div className="mt-2 text-xs uppercase tracking-wider text-primary-foreground/60">
+                      {d.label}
+                    </div>
                     <div className="mt-1 text-sm font-medium">{d.value}</div>
                   </div>
                 ))}
@@ -75,10 +76,22 @@ function ExportPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { country: "Japan", note: "High-spec grow bags and fine peat blocks for greenhouse." },
-              { country: "United Kingdom", note: "Retail-pack briquettes and horticulture mixes." },
-              { country: "United States", note: "Containers for ornamental nurseries and erosion control." },
-              { country: "France", note: "Organic-grade coco peat for vineyards and ornamentals." },
+              {
+                country: "Japan",
+                note: "High-spec grow bags and fine peat blocks for greenhouse.",
+              },
+              {
+                country: "United Kingdom",
+                note: "Retail-pack briquettes and horticulture mixes.",
+              },
+              {
+                country: "United States",
+                note: "Containers for ornamental nurseries and erosion control.",
+              },
+              {
+                country: "France",
+                note: "Organic-grade coco peat for vineyards and ornamentals.",
+              },
             ].map((m) => (
               <div key={m.country} className="p-6 rounded-2xl bg-background border border-border">
                 <h3 className="font-serif text-xl">{m.country}</h3>
