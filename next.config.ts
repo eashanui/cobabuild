@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  basePath: "/cobabuild",
+  output: "export",
   trailingSlash: true,
   images: {
     unoptimized: true,
