@@ -1,3 +1,4 @@
+import type { StaticImageData } from "next/image";
 import blocks from "@/assets/product-blocks.jpg";
 import husk from "@/assets/product-husk.jpg";
 import fibre from "@/assets/product-fibre.jpg";
@@ -8,7 +9,7 @@ export type Product = {
   name: string;
   category: string;
   tagline: string;
-  image: string;
+  image: StaticImageData;
   description: string;
   specs: { label: string; value: string }[];
 };
@@ -100,7 +101,7 @@ export const products: Product[] = [
     description:
       "Handcrafted coir pots and hanging basket liners. Fully biodegradable, ideal for nursery transplants and decorative landscaping.",
     specs: [
-      { label: "Sizes", value: "4\", 6\", 8\", 10\", 12\", 14\"" },
+      { label: "Sizes", value: '4", 6", 8", 10", 12", 14"' },
       { label: "Material", value: "100% natural coir fibre" },
       { label: "Lifespan", value: "12–24 months outdoor" },
     ],
@@ -163,7 +164,12 @@ export const products: Product[] = [
   },
 ];
 
-export const productCategoryGrid = [
+export const productCategoryGrid: {
+  title: string;
+  description: string;
+  image: StaticImageData;
+  slug: string;
+}[] = [
   {
     title: "Coco Peat Blocks & Briquettes",
     description: "Compressed blocks, briquettes and PNG mix in multiple grades.",

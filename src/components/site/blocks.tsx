@@ -1,4 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight, Quote } from "lucide-react";
 
@@ -32,21 +34,20 @@ export function ProductCard({
 }: {
   title: string;
   description: string;
-  image: string;
+  image: StaticImageData;
   slug: string;
 }) {
   return (
     <Link
-      to="/products/$slug"
-      params={{ slug }}
+      href={`/products/${slug}`}
       className="group block rounded-2xl overflow-hidden bg-card border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
     >
-      <div className="aspect-[4/3] overflow-hidden bg-muted">
-        <img
+      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+        <Image
           src={image}
           alt={title}
-          loading="lazy"
-          className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>
       <div className="p-5">
@@ -106,23 +107,21 @@ export function CTASection({
         <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-10 md:p-16">
           <div className="absolute inset-0 opacity-10 pointer-events-none [background-image:radial-gradient(white_1px,transparent_1px)] [background-size:24px_24px]" />
           <div className="relative max-w-2xl">
-            {eyebrow && (
-              <span className="eyebrow text-gold">{eyebrow}</span>
-            )}
+            {eyebrow && <span className="eyebrow text-gold">{eyebrow}</span>}
             <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight text-primary-foreground">
               {title}
             </h2>
             <p className="mt-5 text-primary-foreground/80 text-lg max-w-xl">{description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to={primaryTo as "/contact"}
+                href={primaryTo}
                 className="inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-6 py-3 text-sm font-semibold hover:brightness-105 transition"
               >
                 {primaryLabel}
               </Link>
               {secondaryLabel && secondaryTo && (
                 <Link
-                  to={secondaryTo as "/downloads"}
+                  href={secondaryTo}
                   className="inline-flex items-center justify-center rounded-md border border-primary-foreground/30 text-primary-foreground px-6 py-3 text-sm font-semibold hover:bg-primary-foreground/10 transition"
                 >
                   {secondaryLabel}

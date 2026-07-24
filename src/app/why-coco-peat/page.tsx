@@ -1,32 +1,41 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import Image from "next/image";
 import { Droplets, Wind, Leaf, Recycle } from "lucide-react";
 import growBagsImg from "@/assets/grow-bags.jpg";
 import { PageHero, CTASection } from "@/components/site/blocks";
 
-export const Route = createFileRoute("/why-coco-peat")({
-  head: () => ({
-    meta: [
-      { title: "Why Coco Peat Benefits & Applications | Coba Peat Lanka" },
-      {
-        name: "description",
-        content:
-          "Coco peat is a renewable, peat-moss-free growing medium with superior water retention, aeration and pH stability. Learn how horticulture, greenhouse and erosion-control sectors use it.",
-      },
-      { property: "og:url", content: "/why-coco-peat" },
-    ],
-    links: [{ rel: "canonical", href: "/why-coco-peat" }],
-  }),
-  component: WhyPage,
-});
+export const metadata: Metadata = {
+  title: "Why Coco Peat | Benefits & Applications",
+  description:
+    "Coco peat is a renewable, peat-moss-free growing medium with superior water retention, aeration and pH stability. Learn how horticulture, greenhouse and erosion-control sectors use it.",
+  openGraph: { url: "/why-coco-peat" },
+  alternates: { canonical: "/why-coco-peat" },
+};
 
 const benefits = [
-  { icon: Droplets, title: "Holds 8–10x its weight in water", body: "Dramatically reduces irrigation frequency compared to traditional soil." },
-  { icon: Wind, title: "Excellent aeration", body: "Fibrous structure delivers oxygen to roots, accelerating plant growth." },
-  { icon: Leaf, title: "Stable, near-neutral pH", body: "Naturally falls in the 5.5–6.5 range, ideal for most crops." },
-  { icon: Recycle, title: "100% renewable", body: "A by-product of coconut processing no peat bogs harmed." },
+  {
+    icon: Droplets,
+    title: "Holds 8–10x its weight in water",
+    body: "Dramatically reduces irrigation frequency compared to traditional soil.",
+  },
+  {
+    icon: Wind,
+    title: "Excellent aeration",
+    body: "Fibrous structure delivers oxygen to roots, accelerating plant growth.",
+  },
+  {
+    icon: Leaf,
+    title: "Stable, near-neutral pH",
+    body: "Naturally falls in the 5.5–6.5 range, ideal for most crops.",
+  },
+  {
+    icon: Recycle,
+    title: "100% renewable",
+    body: "A by-product of coconut processing no peat bogs harmed.",
+  },
 ];
 
-function WhyPage() {
+export default function WhyPage() {
   return (
     <>
       <PageHero
@@ -38,7 +47,13 @@ function WhyPage() {
       {/* INTRO */}
       <section className="section-y">
         <div className="container-wide grid lg:grid-cols-2 gap-14 items-center">
-          <img src={growBagsImg} alt="Seedlings in coco peat grow bags" loading="lazy" width={1280} height={896} className="rounded-2xl shadow-xl" />
+          <Image
+            src={growBagsImg}
+            alt="Seedlings in coco peat grow bags"
+            width={1280}
+            height={896}
+            className="rounded-2xl shadow-xl"
+          />
           <div>
             <span className="eyebrow">What is it?</span>
             <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight">
@@ -63,7 +78,9 @@ function WhyPage() {
         <div className="container-wide">
           <div className="max-w-2xl mb-12">
             <span className="eyebrow">Benefits</span>
-            <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight">Why growers switch.</h2>
+            <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight">
+              Why growers switch.
+            </h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {benefits.map((b) => (
@@ -82,16 +99,33 @@ function WhyPage() {
         <div className="container-wide">
           <div className="max-w-2xl mb-12">
             <span className="eyebrow">Applications</span>
-            <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight">Where it's used.</h2>
+            <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight">
+              Where it&apos;s used.
+            </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { t: "Horticulture", b: "Container growing for ornamentals, vegetables and herbs." },
-              { t: "Greenhouse Production", b: "Tomatoes, cucumbers, strawberries and soft fruit on grow bags." },
-              { t: "Erosion Control", b: "Geotextiles and biologs for slopes, shorelines and restoration." },
-              { t: "Hydroponics", b: "Excellent water-holding substrate for drip-fed systems." },
-              { t: "Nursery Propagation", b: "Coir discs and plugs for seed starting and cuttings." },
-              { t: "Landscaping & Mulch", b: "Decorative chips and mulch for water-wise gardens." },
+              {
+                t: "Greenhouse Production",
+                b: "Tomatoes, cucumbers, strawberries and soft fruit on grow bags.",
+              },
+              {
+                t: "Erosion Control",
+                b: "Geotextiles and biologs for slopes, shorelines and restoration.",
+              },
+              {
+                t: "Hydroponics",
+                b: "Excellent water-holding substrate for drip-fed systems.",
+              },
+              {
+                t: "Nursery Propagation",
+                b: "Coir discs and plugs for seed starting and cuttings.",
+              },
+              {
+                t: "Landscaping & Mulch",
+                b: "Decorative chips and mulch for water-wise gardens.",
+              },
             ].map((a) => (
               <div key={a.t} className="p-6 rounded-2xl border border-border bg-card">
                 <h3 className="font-serif text-xl">{a.t}</h3>

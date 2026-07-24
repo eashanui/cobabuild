@@ -1,11 +1,10 @@
-import { Link } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown, Leaf } from "lucide-react";
 import logoAsset from "@/assets/logo_transparant.png";
-
-const homenav = [
-  { label: "Home", to: "/" },
-];
 
 const productCategories = [
   { name: "Coco Peat Blocks", slug: "coco-peat-blocks" },
@@ -31,9 +30,15 @@ const nav = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+
+  const isActive = (to: string) => {
+    if (to === "/") return pathname === "/";
+    return pathname.startsWith(to);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -51,14 +56,14 @@ export function Header() {
       }`}
     >
       <div className="container-wide flex items-center justify-between h-18 py-3">
-        <Link to="/" className="flex items-center gap-2.5 shrink-0">
+<Link href="/" className="flex items-center gap-2.5 shrink-0">
           <img
             src={logoAsset}
             alt="Coba Peat Lanka logo"
             width={48}
             height={48}
             className="h-11 w-auto object-contain"
-          />
+          /> main
           <span className="flex flex-col leading-tight">
             <span className="font-serif text-lg font-semibold tracking-tight">Coba Peat Lanka</span>
             <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -68,26 +73,21 @@ export function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7 text-sm">
-          <div>
-            {homenav.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              className="text-foreground/85 hover:text-primary transition-colors"
-              activeProps={{ className: "text-primary font-medium" }}
-            >
-              {n.label}
-            </Link>
-          ))}
-          </div>
+          <Link
+            href="/"
+            className={`transition-colors ${isActive("/") ? "text-primary font-medium" : "text-foreground/85 hover:text-primary"}`}
+          >
+            Home
+          </Link>
+
           <div
             className="relative"
             onMouseEnter={() => setProductsOpen(true)}
             onMouseLeave={() => setProductsOpen(false)}
           >
             <Link
-              to="/products"
-              className="flex items-center gap-1 text-foreground/85 hover:text-primary transition-colors py-2"
+              href="/products"
+              className={`flex items-center gap-1 transition-colors py-2 ${isActive("/products") ? "text-primary font-medium" : "text-foreground/85 hover:text-primary"}`}
             >
               Products <ChevronDown className="h-3.5 w-3.5" />
             </Link>
@@ -97,8 +97,7 @@ export function Header() {
                   {productCategories.map((c) => (
                     <Link
                       key={c.slug}
-                      to="/products/$slug"
-                      params={{ slug: c.slug }}
+                      href={`/products/${c.slug}`}
                       className="px-3 py-2 rounded-md text-sm text-foreground/85 hover:bg-muted hover:text-primary transition-colors"
                     >
                       {c.name}
@@ -108,12 +107,12 @@ export function Header() {
               </div>
             )}
           </div>
+
           {nav.map((n) => (
             <Link
               key={n.to}
-              to={n.to}
-              className="text-foreground/85 hover:text-primary transition-colors"
-              activeProps={{ className: "text-primary font-medium" }}
+              href={n.to}
+              className={`transition-colors ${isActive(n.to) ? "text-primary font-medium" : "text-foreground/85 hover:text-primary"}`}
             >
               {n.label}
             </Link>
@@ -122,7 +121,7 @@ export function Header() {
 
         <div className="hidden lg:flex items-center gap-3">
           <Link
-            to="/contact"
+            href="/contact"
             className="inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground hover:brightness-105 px-4 py-2.5 text-sm font-semibold shadow-sm transition"
           >
             Get a Quote
@@ -141,25 +140,25 @@ export function Header() {
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
           <div className="container-wide py-4 flex flex-col gap-1">
-            {homenav.map((n) => (
             <Link
-              key={n.to}
-              to={n.to}
+              href="/"
+              onClick={() => setOpen(false)}
               className="px-3 py-2.5 rounded-md hover:bg-muted"
-              activeProps={{ className: "text-primary font-medium" }}
             >
-              {n.label}
+              Home
             </Link>
-          ))}
-            <Link to="/products" onClick={() => setOpen(false)} className="px-3 py-2.5 rounded-md hover:bg-muted font-medium">
+            <Link
+              href="/products"
+              onClick={() => setOpen(false)}
+              className="px-3 py-2.5 rounded-md hover:bg-muted font-medium"
+            >
               All Products
             </Link>
             <div className="pl-4 mb-2 grid grid-cols-1 gap-0.5">
               {productCategories.slice(0, 6).map((c) => (
                 <Link
                   key={c.slug}
-                  to="/products/$slug"
-                  params={{ slug: c.slug }}
+                  href={`/products/${c.slug}`}
                   onClick={() => setOpen(false)}
                   className="px-3 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-muted"
                 >
@@ -170,7 +169,7 @@ export function Header() {
             {nav.map((n) => (
               <Link
                 key={n.to}
-                to={n.to}
+                href={n.to}
                 onClick={() => setOpen(false)}
                 className="px-3 py-2.5 rounded-md hover:bg-muted"
               >
@@ -178,7 +177,7 @@ export function Header() {
               </Link>
             ))}
             <Link
-              to="/contact"
+              href="/contact"
               onClick={() => setOpen(false)}
               className="mt-3 inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-4 py-3 text-sm font-semibold"
             >

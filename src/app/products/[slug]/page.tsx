@@ -1,59 +1,52 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Check, MessageSquare } from "lucide-react";
 import { products } from "@/lib/products";
 
-export const Route = createFileRoute("/products/$slug")({
-  loader: ({ params }) => {
-    const product = products.find((p) => p.slug === params.slug);
-    if (!product) throw notFound();
-    return { product };
-  },
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData?.product.name ?? "Product"} Coba Peat Lanka` },
-      {
-        name: "description",
-        content: loaderData?.product.description?.slice(0, 155) ?? "",
-      },
-      {
-        property: "og:title",
-        content: `${loaderData?.product.name ?? "Product"} Coba Peat Lanka`,
-      },
-      { property: "og:image", content: loaderData?.product.image },
-    ],
-  }),
-  notFoundComponent: () => (
-    <div className="container-wide py-32 text-center">
-      <h1 className="font-serif text-4xl">Product not found</h1>
-      <Link to="/products" className="mt-6 inline-block text-accent">
-        ← Back to products
-      </Link>
-    </div>
-  ),
-  component: ProductDetail,
-});
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
-function ProductDetail() {
-  const { product } = Route.useLoaderData();
+export async function generateStaticParams() {
+  return products.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const product = products.find((p) => p.slug === slug);
+  if (!product) return {};
+  return {
+    title: product.name,
+    description: product.description.slice(0, 155),
+    openGraph: {
+      title: `${product.name} | Coba Peat Lanka`,
+      images: [product.image.src],
+    },
+  };
+}
+
+export default async function ProductPage({ params }: Props) {
+  const { slug } = await params;
+  const product = products.find((p) => p.slug === slug);
+  if (!product) notFound();
+
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
 
   return (
     <>
       <section className="paper-texture border-b border-border">
         <div className="container-wide py-10 text-sm text-muted-foreground">
-          <Link to="/products" className="hover:text-primary">Products</Link>
+          <Link href="/products" className="hover:text-primary">
+            Products
+          </Link>
           <span className="mx-2">/</span>
           <span className="text-foreground">{product.name}</span>
         </div>
         <div className="container-wide pb-16 md:pb-20 grid lg:grid-cols-2 gap-12 items-start">
-          <div className="aspect-square rounded-2xl overflow-hidden bg-card border border-border">
-            <img
-              src={product.image}
-              alt={product.name}
-              width={1024}
-              height={1024}
-              className="h-full w-full object-cover"
-            />
+          <div className="relative aspect-square rounded-2xl overflow-hidden bg-card border border-border">
+            <Image src={product.image} alt={product.name} fill className="object-cover" />
           </div>
           <div>
             <span className="eyebrow">{product.category}</span>
@@ -63,7 +56,7 @@ function ProductDetail() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/contact"
+                href="/contact"
                 className="inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-6 py-3 text-sm font-semibold hover:brightness-105 transition shadow-sm"
               >
                 Request a Quote <ArrowRight className="ml-2 h-4 w-4" />
@@ -79,7 +72,12 @@ function ProductDetail() {
             </div>
 
             <ul className="mt-8 grid sm:grid-cols-2 gap-3 text-sm">
-              {["BOI-approved exporter", "In-house QC lab", "Custom packaging", "FCL 20'/40' shipments"].map((f) => (
+              {[
+                "BOI-approved exporter",
+                "In-house QC lab",
+                "Custom packaging",
+                "FCL 20'/40' shipments",
+              ].map((f) => (
                 <li key={f} className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-accent" /> {f}
                 </li>
@@ -97,11 +95,8 @@ function ProductDetail() {
           <div className="mt-8 rounded-2xl border border-border overflow-hidden bg-card">
             <table className="w-full text-sm">
               <tbody>
-                {product.specs.map((s: { label: string; value: string }, i: number) => (
-                  <tr
-                    key={s.label}
-                    className={i % 2 === 0 ? "bg-card" : "bg-background"}
-                  >
+                {product.specs.map((s, i) => (
+                  <tr key={s.label} className={i % 2 === 0 ? "bg-card" : "bg-background"}>
                     <th className="text-left px-6 py-4 font-medium text-muted-foreground w-1/3">
                       {s.label}
                     </th>
@@ -122,12 +117,16 @@ function ProductDetail() {
             {related.map((p) => (
               <Link
                 key={p.slug}
-                to="/products/$slug"
-                params={{ slug: p.slug }}
+                href={`/products/${p.slug}`}
                 className="group rounded-2xl overflow-hidden bg-background border border-border hover:shadow-lg transition"
               >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img src={p.image} alt={p.name} loading="lazy" className="h-full w-full object-cover group-hover:scale-105 transition" />
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition"
+                  />
                 </div>
                 <div className="p-5">
                   <h3 className="font-serif text-xl">{p.name}</h3>

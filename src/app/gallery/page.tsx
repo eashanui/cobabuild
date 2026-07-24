@@ -1,4 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import { PageHero } from "@/components/site/blocks";
 import hero from "@/assets/hero-cocopeat.jpg";
 import factory from "@/assets/factory.jpg";
@@ -8,19 +10,14 @@ import husk from "@/assets/product-husk.jpg";
 import fibre from "@/assets/product-fibre.jpg";
 import growbag from "@/assets/product-growbag.jpg";
 
-export const Route = createFileRoute("/gallery")({
-  head: () => ({
-    meta: [
-      { title: "Gallery Factory, Products & Shipments | Coba Peat Lanka" },
-      { name: "description", content: "Visual tour of our factory, drying yard, QC lab, products and shipments." },
-      { property: "og:url", content: "/gallery" },
-    ],
-    links: [{ rel: "canonical", href: "/gallery" }],
-  }),
-  component: GalleryPage,
-});
+export const metadata: Metadata = {
+  title: "Gallery | Factory, Products & Shipments",
+  description: "Visual tour of our factory, drying yard, QC lab, products and shipments.",
+  openGraph: { url: "/gallery" },
+  alternates: { canonical: "/gallery" },
+};
 
-const items = [
+const items: { src: StaticImageData; caption: string; h?: "tall" }[] = [
   { src: hero, caption: "Raw coco peat & fibre", h: "tall" },
   { src: factory, caption: "Block storage at our Kurunegala factory" },
   { src: grow, caption: "Greenhouse trials in our grow bags", h: "tall" },
@@ -30,7 +27,7 @@ const items = [
   { src: growbag, caption: "Tomato production in Nature Grow Bags" },
 ];
 
-function GalleryPage() {
+export default function GalleryPage() {
   return (
     <>
       <PageHero
@@ -46,12 +43,16 @@ function GalleryPage() {
                 key={i}
                 className="mb-5 break-inside-avoid rounded-2xl overflow-hidden bg-card border border-border group"
               >
-                <img
-                  src={it.src}
-                  alt={it.caption}
-                  loading="lazy"
-                  className={`w-full object-cover ${it.h === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"} group-hover:scale-105 transition duration-500`}
-                />
+                <div
+                  className={`relative overflow-hidden ${it.h === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"}`}
+                >
+                  <Image
+                    src={it.src}
+                    alt={it.caption}
+                    fill
+                    className="object-cover group-hover:scale-105 transition duration-500"
+                  />
+                </div>
                 <figcaption className="p-4 text-sm text-muted-foreground">{it.caption}</figcaption>
               </figure>
             ))}

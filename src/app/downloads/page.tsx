@@ -1,27 +1,42 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { Metadata } from "next";
 import { FileText, Download } from "lucide-react";
 import { PageHero } from "@/components/site/blocks";
 
-export const Route = createFileRoute("/downloads")({
-  head: () => ({
-    meta: [
-      { title: "Downloads Company Profile & Product Catalogue | Coba Peat Lanka" },
-      { name: "description", content: "Download our company profile PDF and full product catalogue." },
-      { property: "og:url", content: "/downloads" },
-    ],
-    links: [{ rel: "canonical", href: "/downloads" }],
-  }),
-  component: DownloadsPage,
-});
+export const metadata: Metadata = {
+  title: "Downloads | Company Profile & Product Catalogue",
+  description: "Download our company profile PDF and full product catalogue.",
+  openGraph: { url: "/downloads" },
+  alternates: { canonical: "/downloads" },
+};
 
 const docs = [
-  { title: "Company Profile", desc: "Our story, certifications, facilities, references and contact details.", size: "4.2 MB", file: "#" },
-  { title: "Product Catalogue 2026", desc: "Full product range with technical specs, packaging and shipping options.", size: "8.7 MB", file: "#" },
-  { title: "QC Report Sample", desc: "Example batch QC report for our 5kg High EC coco peat block.", size: "0.6 MB", file: "#" },
-  { title: "Australia Buyer's Guide", desc: "AQIS compliance, sailing schedules and Incoterms reference for Australian buyers.", size: "1.8 MB", file: "#" },
+  {
+    title: "Company Profile",
+    desc: "Our story, certifications, facilities, references and contact details.",
+    size: "4.2 MB",
+    file: "#",
+  },
+  {
+    title: "Product Catalogue 2026",
+    desc: "Full product range with technical specs, packaging and shipping options.",
+    size: "8.7 MB",
+    file: "#",
+  },
+  {
+    title: "QC Report Sample",
+    desc: "Example batch QC report for our 5kg High EC coco peat block.",
+    size: "0.6 MB",
+    file: "#",
+  },
+  {
+    title: "Australia Buyer's Guide",
+    desc: "AQIS compliance, sailing schedules and Incoterms reference for Australian buyers.",
+    size: "1.8 MB",
+    file: "#",
+  },
 ];
 
-function DownloadsPage() {
+export default function DownloadsPage() {
   return (
     <>
       <PageHero
@@ -44,7 +59,9 @@ function DownloadsPage() {
                 <h3 className="font-serif text-xl">{d.title}</h3>
                 <p className="mt-1.5 text-sm text-muted-foreground">{d.desc}</p>
                 <div className="mt-4 flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground uppercase tracking-wider">PDF · {d.size}</span>
+                  <span className="text-xs text-muted-foreground uppercase tracking-wider">
+                    PDF · {d.size}
+                  </span>
                   <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
                     Download <Download className="h-4 w-4" />
                   </span>
