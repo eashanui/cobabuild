@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   CalendarCheck,
   ShieldCheck,
@@ -11,7 +12,10 @@ import {
   Download,
   ArrowRight,
 } from "lucide-react";
-import heroImg from "@/assets/hero-cocopeat.jpg";
+import heroFactory from "@/assets/hero-factory.jpg";
+import heroProduct from "@/assets/hero-product.jpg";
+import heroTeam from "@/assets/hero-team.jpg";
+import heroAward from "@/assets/hero-award.jpg";
 import factoryImg from "@/assets/factory.jpg";
 import {
   StatBlock,
@@ -73,18 +77,36 @@ const testimonials = [
 ];
 
 function HomePage() {
+  const slides = [
+    { src: heroFactory, alt: "Coba Peat Lanka factory floor" },
+    { src: heroProduct, alt: "Premium coco peat blocks" },
+    { src: heroTeam, alt: "The Coba Peat Lanka team" },
+    { src: heroAward, alt: "Coba Peat Lanka receiving an export excellence award" },
+  ];
+  const [slide, setSlide] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setSlide((s) => (s + 1) % slides.length), 5000);
+    return () => clearInterval(id);
+  }, [slides.length]);
+
   return (
     <>
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <img
-            src={heroImg}
-            alt="Coconut coir fibre and coco peat substrate"
-            width={1920}
-            height={1080}
-            className="h-full w-full object-cover"
-          />
+          {slides.map((s, i) => (
+            <img
+              key={s.src}
+              src={s.src}
+              alt={s.alt}
+              width={1920}
+              height={1080}
+              loading={i === 0 ? "eager" : "lazy"}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out ${
+                i === slide ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/30" />
         </div>
         <div className="relative container-wide pt-28 pb-24 md:pt-40 md:pb-36">
@@ -114,6 +136,19 @@ function HomePage() {
                 <Download className="mr-2 h-4 w-4" /> Download Company Profile
               </Link>
             </div>
+          </div>
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {slides.map((s, i) => (
+              <button
+                key={s.src}
+                type="button"
+                onClick={() => setSlide(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-2 rounded-full transition-all ${
+                  i === slide ? "w-8 bg-gold" : "w-2 bg-background/50 hover:bg-background/80"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </section>

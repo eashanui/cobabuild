@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown, Leaf } from "lucide-react";
-
+import logoAsset from "@/assets/logo_transparant.png";
 
 const homenav = [
   { label: "Home", to: "/" },
@@ -52,9 +52,13 @@ export function Header() {
     >
       <div className="container-wide flex items-center justify-between h-18 py-3">
         <Link to="/" className="flex items-center gap-2.5 shrink-0">
-          <span className="grid place-items-center h-10 w-10 rounded-full bg-primary text-primary-foreground">
-            <Leaf className="h-5 w-5" />
-          </span>
+          <img
+            src={logoAsset}
+            alt="Coba Peat Lanka logo"
+            width={48}
+            height={48}
+            className="h-11 w-auto object-contain"
+          />
           <span className="flex flex-col leading-tight">
             <span className="font-serif text-lg font-semibold tracking-tight">Coba Peat Lanka</span>
             <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
