@@ -22,9 +22,18 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
+function splitEmails(value: string | undefined) {
+  return value
+    ? value
+        .split(",")
+        .map((address) => address.trim())
+        .filter(Boolean)
+    : [];
+}
+
 export async function POST(request: Request) {
   const { env } = getCloudflareContext();
-  const { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } = env;
+  const { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_CC_EMAIL, CONTACT_FROM_EMAIL } = env;
 
   if (!RESEND_API_KEY || !CONTACT_TO_EMAIL || !CONTACT_FROM_EMAIL) {
     console.error("Contact form is missing RESEND_API_KEY, CONTACT_TO_EMAIL or CONTACT_FROM_EMAIL");
@@ -76,10 +85,14 @@ export async function POST(request: Request) {
     ${message ? `<p><strong>Message:</strong></p><p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>` : ""}
   `;
 
+  const to = splitEmails(CONTACT_TO_EMAIL);
+  const cc = splitEmails(CONTACT_CC_EMAIL);
+
   const resend = new Resend(RESEND_API_KEY);
   const { error } = await resend.emails.send({
     from: CONTACT_FROM_EMAIL,
-    to: CONTACT_TO_EMAIL,
+    to,
+    ...(cc.length > 0 ? { cc } : {}),
     replyTo: email,
     subject: `Quote Request from ${name}`,
     html,
