@@ -1,0 +1,18 @@
+# Copy this file to `.dev.vars` (gitignored) for local `next dev` / `wrangler dev`.
+# In production, set these as Worker secrets instead of committing them:
+#   npx wrangler secret put RESEND_API_KEY
+#   npx wrangler secret put CONTACT_TO_EMAIL
+#   npx wrangler secret put CONTACT_CC_EMAIL   (optional)
+#   npx wrangler secret put CONTACT_FROM_EMAIL
+
+# https://resend.com/api-keys
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Inbox(es) that receive contact-form submissions. Comma-separate for multiple recipients.
+CONTACT_TO_EMAIL=info@cobapeatlanka.com,sales@cobapeatlanka.com
+
+# Optional. Comma-separated CC recipients.
+CONTACT_CC_EMAIL=manager@cobapeatlanka.com
+
+# Must be an address on a domain you've verified in Resend (https://resend.com/domains).
+CONTACT_FROM_EMAIL=Coba Peat Lanka <no-reply@cobapeatlanka.com>

@@ -1,14 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Phone, Mail, MessageCircle, Send } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle, Send, Loader2 } from "lucide-react";
 
 export function ContactSection() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    setSubmitting(true);
+    setError(null);
+
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const body = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(body?.error ?? "Something went wrong. Please try again.");
+      }
+
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -39,16 +64,8 @@ export function ContactSection() {
                 <Field label="Country" name="country" />
               </div>
               <div className="grid sm:grid-cols-2 gap-5">
-                <Field
-                  label="Product Interest"
-                  name="product"
-                  placeholder="e.g. 5kg blocks"
-                />
-                <Field
-                  label="Quantity / FCL"
-                  name="quantity"
-                  placeholder="e.g. 1x40' HC"
-                />
+                <Field label="Product Interest" name="product" placeholder="e.g. 5kg blocks" />
+                <Field label="Quantity / FCL" name="quantity" placeholder="e.g. 1x40' HC" />
               </div>
               <label className="grid gap-1.5">
                 <span className="text-sm font-medium">Message</span>
@@ -59,11 +76,25 @@ export function ContactSection() {
                   placeholder="Anything else we should know specs, destination port, timeline…"
                 />
               </label>
+              {error && (
+                <p className="text-sm text-destructive" role="alert">
+                  {error}
+                </p>
+              )}
               <button
                 type="submit"
-                className="justify-self-start inline-flex items-center gap-2 rounded-md bg-gold text-gold-foreground px-6 py-3 text-sm font-semibold hover:brightness-105 transition shadow-sm"
+                disabled={submitting}
+                className="justify-self-start inline-flex items-center gap-2 rounded-md bg-gold text-gold-foreground px-6 py-3 text-sm font-semibold hover:brightness-105 transition shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Send Inquiry <Send className="h-4 w-4" />
+                {submitting ? (
+                  <>
+                    Sending <Loader2 className="h-4 w-4 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Send Inquiry <Send className="h-4 w-4" />
+                  </>
+                )}
               </button>
             </form>
           )}
