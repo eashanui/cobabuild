@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { HeroSlider } from "@/components/site/HeroSlider";
 import {
   CalendarCheck,
   ShieldCheck,
@@ -13,7 +14,6 @@ import {
   Download,
   ArrowRight,
 } from "lucide-react";
-import heroImg from "@/assets/hero-cocopeat.jpg";
 import factoryImg from "@/assets/factory.jpg";
 import {
   StatBlock,
@@ -66,18 +66,13 @@ const testimonials = [
 ];
 
 export default function HomePage() {
+  
   return (
     <>
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={heroImg}
-            alt="Coconut coir fibre and coco peat substrate"
-            fill
-            priority
-            className="object-cover"
-          />
+           <div className="absolute inset-0">
+          <HeroSlider />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/30" />
         </div>
         <div className="relative container-wide pt-28 pb-24 md:pt-40 md:pb-36">

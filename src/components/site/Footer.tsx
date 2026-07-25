@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Leaf, Mail, Phone, MapPin, Facebook, Linkedin, Instagram } from "lucide-react";
+import Image from "next/image";
+import logoAsset from "@/assets/logo_transparant.png";
 
 export function Footer() {
   return (
@@ -7,8 +9,14 @@ export function Footer() {
       <div className="container-wide py-16 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2.5">
-            <span className="grid place-items-center h-10 w-10 rounded-full bg-accent text-accent-foreground">
-              <Leaf className="h-5 w-5" />
+            <span className="grid place-items-center h-10 w-10  bg-white rounded-t-2xl text-accent-foreground">
+               <Image
+                  src={logoAsset}
+                  alt="Coba Peat Lanka logo"
+                  width={48}
+                  height={48}
+                  className="h-11 w-auto object-contain"
+                />
             </span>
             <div className="leading-tight">
               <div className="font-serif text-lg text-background">Coba Peat Lanka</div>
