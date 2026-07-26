@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
-import { FlaskConical, Award, ShieldCheck } from "lucide-react";
+import {
+  FlaskConical,
+  Award,
+  ShieldCheck,
+  BadgeDollarSign,
+  PackageCheck,
+  Handshake,
+  Leaf,
+  Cpu,
+  Sparkles,
+} from "lucide-react";
 import { PageHero, CTASection } from "@/components/site/blocks";
 
 export const metadata: Metadata = {
@@ -54,6 +64,74 @@ export default function QualityPage() {
               <p className="mt-2 text-sm text-muted-foreground">{f.body}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* REASONS TO SELECT */}
+      <section className="section-y bg-muted/30 border-y border-border">
+        <div className="container-wide">
+          <div className="mx-auto max-w-3xl text-center">
+            <span className="eyebrow">Reasons to select as supplier</span>
+            <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight">
+              Reasons to Select Coba Peat Lanka as your “Full Partner” Supplier.
+            </h2>
+            <p className="mt-6 text-lg text-muted-foreground leading-8">
+              We believe that our supply is your company&apos;s lifeline for sustainability and continued growth. To evaluate our performance as a supplier, below criteria will give you an accurate snapshot of our efficiency as a supplier for your business.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {[
+              {
+                title: "Fair Pricing Structure",
+                text: "Balanced value with transparent pricing for long-term partnerships.",
+                icon: BadgeDollarSign,
+              },
+              {
+                title: "Assurance of Supply",
+                text: "Reliable availability and consistent delivery planning for your operations.",
+                icon: PackageCheck,
+              },
+              {
+                title: "Responsiveness",
+                text: "Fast communication and dependable support from enquiry to shipment.",
+                icon: Handshake,
+              },
+              {
+                title: "Ethically Made Products",
+                text: "Responsibly sourced materials and a business approach built on integrity.",
+                icon: Leaf,
+              },
+              {
+                title: "Environment and Safety",
+                text: "Processes designed to reduce impact while protecting people and product quality.",
+                icon: ShieldCheck,
+              },
+              {
+                title: "Technology",
+                text: "Modern production and logistics capabilities supporting efficient execution.",
+                icon: Cpu,
+              },
+              {
+                title: "Quality",
+                text: "Rigorous testing and superior standards built into every shipment.",
+                icon: Sparkles,
+              },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.title}
+                  className="group rounded-2xl border border-border bg-background p-7 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg"
+                >
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
+                    <Icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="mt-5 font-serif text-xl">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.text}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
