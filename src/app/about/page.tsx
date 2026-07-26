@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Wrench, Boxes, FlaskConical, Truck, Sprout } from "lucide-react";
+import { Wrench, Boxes, FlaskConical, Truck, Sprout, Eye, Target, Compass } from "lucide-react";
 import factoryImg from "@/assets/factory.jpg";
+import directorOneImg from "@/assets/directors/D1.png";
+import directorTwoImg from "@/assets/directors/D2.png";
+import directorThreeImg from "@/assets/directors/D3.png";
 import { PageHero, CTASection } from "@/components/site/blocks";
 
 export const metadata: Metadata = {
@@ -32,6 +35,39 @@ const facilities = [
     icon: Truck,
     title: "Loading Bay & Fleet",
     body: "Dedicated loading bays and our own fleet ensure containers reach Colombo Port on schedule.",
+  },
+];
+
+const guidingPillars = [
+  {
+    icon: Eye,
+    title: "Vision",
+    body: "To achieve sustainable growth by nurturing a winning network of partners while being a responsible global citizen that makes a difference.",
+  },
+  {
+    icon: Target,
+    title: "Mission",
+    body: "Our mission is to be the consumer's first choice, delivering innovative products of outstanding quality and great service at a competitive cost through working faster, simpler and together, becoming the global leader in customer value.",
+  },
+  {
+    icon: Compass,
+    title: "Strategy",
+    body: "Our strategy is to innovate, enhance and integrate all our value-added product diversification programs into our supply chain practices and also to be an advocate for home gardeners and women-owned businesses.",
+  },
+];
+
+const directors = [
+  {
+    name: "Mr. Charles P. J. Thomas",
+    image: directorOneImg,
+  },
+  {
+    name: "Mr. Chat Thomas",
+    image: directorTwoImg,
+  },
+  {
+    name: "Mrs. Y. K. Thomas",
+    image: directorThreeImg,
   },
 ];
 
@@ -76,6 +112,66 @@ export default function AboutPage() {
                 meet the country&apos;s most rigorous standards for foreign trade.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GUIDING PILLARS */}
+      <section className="section-y bg-card border-y border-border">
+        <div className="container-wide">
+          <div className="max-w-3xl mb-12">
+            <span className="eyebrow">Vision / Mission / Strategy</span>
+            <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight">
+              Guiding our growth with purpose.
+            </h2>
+            <p className="mt-5 text-muted-foreground text-lg">
+              Our direction is shaped by responsible growth, customer value and a lasting impact
+              across every link in our supply chain.
+            </p>
+          </div>
+          <div className="grid lg:grid-cols-3 gap-6">
+            {guidingPillars.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-border bg-background p-6 shadow-sm"
+              >
+                <span className="grid h-12 w-12 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <item.icon className="h-6 w-6" />
+                </span>
+                <h3 className="mt-5 font-serif text-2xl">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DIRECTORS */}
+      <section className="section-y border-y border-border">
+        <div className="container-wide">
+          <div className="max-w-2xl mb-12">
+            <span className="eyebrow">Company Directors</span>
+            <h2 className="mt-3 font-serif text-3xl md:text-5xl leading-tight">
+              Leadership behind the business.
+            </h2>
+            <p className="mt-5 text-muted-foreground text-lg">
+              The company is guided by experienced leadership committed to quality, service and long-term growth.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {directors.map((director) => (
+              <div key={director.name} className="overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
+                <Image
+                  src={director.image}
+                  alt={director.name}
+                  width={600}
+                  height={760}
+                />
+                <div className="p-6">
+                  <h3 className="font-serif text-2xl leading-tight">{director.name}</h3>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
