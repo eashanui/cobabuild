@@ -5,7 +5,6 @@ import Image from "next/image";
 import {
   ArrowRight,
   Check,
-  MessageSquare,
   Sprout,
   Flower,
   Flower2,
@@ -22,6 +21,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { products } from "@/lib/products";
+import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
 
 const applicationIcons: Record<string, LucideIcon> = {
   Sprout,
@@ -101,7 +101,7 @@ export default async function ProductPage({ params }: Props) {
                 rel="noreferrer"
                 className="inline-flex items-center justify-center rounded-md border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-muted transition"
               >
-                <MessageSquare className="mr-2 h-4 w-4" /> WhatsApp
+                <WhatsAppIcon className="mr-2 h-4 w-4" /> WhatsApp
               </a>
             </div>
 

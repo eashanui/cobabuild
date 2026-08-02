@@ -3,6 +3,9 @@ import { Leaf, Mail, Phone, MapPin, Facebook, Linkedin, Instagram } from "lucide
 import Image from "next/image";
 import logoAsset from "@/assets/logo_transparant.png";
 
+// Social links are hidden for now — flip to true to bring them back once accounts are ready.
+const SHOW_SOCIAL_LINKS = false;
+
 export function Footer() {
   return (
     <footer className="bg-foreground text-background/85 mt-20">
@@ -29,18 +32,20 @@ export function Footer() {
             Nurturing Soil, Growing Futures. BOI-approved direct exporter of premium coco peat
             and coir products from Sri Lanka.
           </p>
-          <div className="mt-5 flex gap-3">
-            {[Facebook, Linkedin, Instagram].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                aria-label="social"
-                className="grid place-items-center h-9 w-9 rounded-full bg-background/10 hover:bg-accent transition-colors"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
-          </div>
+          {SHOW_SOCIAL_LINKS && (
+            <div className="mt-5 flex gap-3">
+              {[Facebook, Linkedin, Instagram].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  aria-label="social"
+                  className="grid place-items-center h-9 w-9 rounded-full bg-background/10 hover:bg-accent transition-colors"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
         <div>
@@ -53,7 +58,6 @@ export function Footer() {
               { to: "/why-coco-peat", label: "Why Coco Peat" },
               { to: "/export", label: "Export Markets" },
               { to: "/gallery", label: "Gallery" },
-              { to: "/blog", label: "Blog & News" },
               { to: "/downloads", label: "Downloads" },
             ].map((l) => (
               <li key={l.to}>
@@ -95,12 +99,6 @@ export function Footer() {
               Kohilagedara, Kurunegala
             </p>
           </address>
-          <Link
-            href="/contact"
-            className="mt-6 inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-4 py-2.5 text-sm font-semibold hover:brightness-105 transition"
-          >
-            Request a Quote
-          </Link>
         </div>
       </div>
 
