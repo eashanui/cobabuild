@@ -10,17 +10,14 @@ import {
   Factory,
   Sprout,
   Recycle,
-  Leaf,
-  Download,
   ArrowRight,
 } from "lucide-react";
-import factoryImg from "@/assets/factory.jpg";
+import factoryImg from "@/assets/hero/cpl-factory.jpg";
 import {
   StatBlock,
-  ProductCard,
   TestimonialCard,
-  CTASection,
 } from "@/components/site/blocks";
+import { ProductCarousel } from "@/components/site/ProductCarousel";
 import { productCategoryGrid } from "@/lib/products";
 
 export const metadata: Metadata = {
@@ -78,7 +75,7 @@ export default function HomePage() {
         <div className="relative container-wide pt-28 pb-24 md:pt-40 md:pb-36">
           <div className="max-w-3xl text-background">
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/10 backdrop-blur border border-background/20 text-xs uppercase tracking-[0.2em] text-background/90">
-              <Leaf className="h-3.5 w-3.5 text-gold" /> Sri Lanka · Since 1993
+              Sri Lanka · Since 1993
             </span>
             <h1 className="mt-6 font-serif text-5xl md:text-7xl leading-[1.02] text-background">
               Nurturing Soil,
@@ -97,10 +94,10 @@ export default function HomePage() {
                 Get a Quote <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <Link
-                href="/downloads"
+                href="/products"
                 className="inline-flex items-center justify-center rounded-md bg-background/10 backdrop-blur border border-background/30 text-background px-6 py-3.5 text-sm font-semibold hover:bg-background/20 transition"
               >
-                <Download className="mr-2 h-4 w-4" /> Download Company Profile
+                View Products <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -136,11 +133,14 @@ export default function HomePage() {
               See all products <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {productCategoryGrid.map((p) => (
-              <ProductCard key={p.slug} {...p} />
-            ))}
-          </div>
+          <ProductCarousel
+            items={productCategoryGrid.map((p) => ({
+              slug: p.slug,
+              title: p.title,
+              description: p.description,
+              image: p.image,
+            }))}
+          />
         </div>
       </section>
 
@@ -273,16 +273,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <CTASection
-        eyebrow="Get the full picture"
-        title="Download our company profile."
-        description="Detailed product specifications, certifications, capacity figures and shipping references everything your procurement team needs in one PDF."
-        primaryLabel="Download PDF"
-        primaryTo="/downloads"
-        secondaryLabel="Talk to our team"
-        secondaryTo="/contact"
-      />
     </>
   );
 }

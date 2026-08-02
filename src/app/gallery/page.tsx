@@ -2,13 +2,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { PageHero } from "@/components/site/blocks";
-import hero from "@/assets/hero-cocopeat.jpg";
-import factory from "@/assets/factory.jpg";
-import grow from "@/assets/grow-bags.jpg";
-import blocks from "@/assets/product-blocks.jpg";
-import husk from "@/assets/product-husk.jpg";
-import fibre from "@/assets/product-fibre.jpg";
-import growbag from "@/assets/product-growbag.jpg";
+import productsCollage from "@/assets/hero/cpl-products.jpg";
+import mulchBlock from "@/assets/products/mulch-block.jpeg";
+import megaCoir from "@/assets/products/mega-coir.jpg";
+import coirMulch from "@/assets/products/coir-mulch.jpg";
+import pottingMix from "@/assets/products/potting-mix.jpg";
+import orchidMix from "@/assets/products/orchid-mix.webp";
+import seedRaisingMix from "@/assets/products/seed-raising-mix.jpg";
+import cocoPeatBales from "@/assets/products/coco-peat-bales.jpg";
+import coirBlock from "@/assets/products/coir-block.jpg";
+import cocoPeatBriquettes from "@/assets/products/coco-peat-briquettes.jpg";
+import coirPeatBrick from "@/assets/products/coir-peat-brick.jpeg";
+import growBags from "@/assets/products/grow-bags.jpeg";
 
 export const metadata: Metadata = {
   title: "Gallery | Factory, Products & Shipments",
@@ -18,13 +23,18 @@ export const metadata: Metadata = {
 };
 
 const items: { src: StaticImageData; caption: string; h?: "tall" }[] = [
-  { src: hero, caption: "Raw coco peat & fibre", h: "tall" },
-  { src: factory, caption: "Block storage at our Kurunegala factory" },
-  { src: grow, caption: "Greenhouse trials in our grow bags", h: "tall" },
-  { src: blocks, caption: "5kg compressed block" },
-  { src: husk, caption: "Husk chips ready for baling" },
-  { src: fibre, caption: "Coir craft and fibre products", h: "tall" },
-  { src: growbag, caption: "Tomato production in Nature Grow Bags" },
+  { src: productsCollage, caption: "Our coir product range, ready for retail and export" },
+  { src: mulchBlock, caption: "Feed & Mulch Block, freshly packed" },
+  { src: megaCoir, caption: "Mega Coir Feed & Mulch in the garden", h: "tall" },
+  { src: coirMulch, caption: "Mega 90 Block premium grade coir mulch" },
+  { src: pottingMix, caption: "Coir Potting Mix block" },
+  { src: orchidMix, caption: "Orchid Mix, our specialty coir blend", h: "tall" },
+  { src: seedRaisingMix, caption: "Seed Raising Mix for propagation" },
+  { src: cocoPeatBales, caption: "Coir Garden Soil block" },
+  { src: coirBlock, caption: "Premium grade coir block, ready to expand" },
+  { src: cocoPeatBriquettes, caption: "Coir-Peat Brick" },
+  { src: coirPeatBrick, caption: "Private-label packing for our export partners", h: "tall" },
+  { src: growBags, caption: "Grow bags packed for hydroponic cultivation" },
 ];
 
 export default function GalleryPage() {

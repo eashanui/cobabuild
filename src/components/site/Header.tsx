@@ -8,25 +8,18 @@ import Image from "next/image";
 import logoAsset from "@/assets/logo_transparant.png";
 
 const productCategories = [
-  { name: "Coco Peat Blocks", slug: "coco-peat-blocks" },
-  { name: "Coco Peat Briquettes", slug: "coco-peat-briquettes" },
+  { name: "Mulch Block", slug: "mulch-block" },
+  { name: "Potting Mix", slug: "potting-mix" },
   { name: "Grow Bags", slug: "grow-bags" },
-  { name: "Husk Chips & Mulch", slug: "husk-chips" },
-  { name: "PNG Mix Blocks", slug: "png-mix-blocks" },
-  { name: "Coir Pots & Hanging Baskets", slug: "coir-pots" },
-  { name: "Coir Discs", slug: "coir-discs" },
-  { name: "Geotextiles & Geo Logs", slug: "geotextiles" },
-  { name: "Coba Living Dolls", slug: "living-dolls" },
-  { name: "Activated Carbon & Charcoal", slug: "activated-carbon" },
+  { name: "Coco Peat Bales", slug: "coco-peat-bales" },
+  { name: "Coco Peat Briquettes", slug: "coco-peat-briquettes" },
 ];
 
 const nav = [
   { label: "About", to: "/about" },
-  { label: "Quality", to: "/quality" },
-  { label: "Why Coco Peat", to: "/why-coco-peat" },
+  { label: "Quality & Process", to: "/quality" },
   { label: "Export", to: "/export" },
   { label: "Gallery", to: "/gallery" },
-  { label: "Blog", to: "/blog" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -40,6 +33,18 @@ export function Header() {
     if (to === "/") return pathname === "/";
     return pathname.startsWith(to);
   };
+
+  const navLinkClass = (active: boolean) =>
+    `relative flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+      active
+        ? "text-primary bg-primary/10 after:absolute after:left-3 after:right-3 after:-bottom-px after:h-0.5 after:rounded-full after:bg-primary"
+        : "text-foreground/75 hover:text-primary hover:bg-primary/5"
+    }`;
+
+  const mobileNavLinkClass = (active: boolean, extra = "") =>
+    `px-3 py-2.5 rounded-md transition-colors ${
+      active ? "text-primary bg-primary/10 font-semibold" : "hover:bg-primary/5 hover:text-primary"
+    } ${extra}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -73,11 +78,8 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-7 text-sm">
-          <Link
-            href="/"
-            className={`transition-colors ${isActive("/") ? "text-primary font-medium" : "text-foreground/85 hover:text-primary"}`}
-          >
+        <nav className="hidden lg:flex items-center gap-1 text-sm">
+          <Link href="/" className={navLinkClass(isActive("/"))}>
             Home
           </Link>
 
@@ -86,10 +88,7 @@ export function Header() {
             onMouseEnter={() => setProductsOpen(true)}
             onMouseLeave={() => setProductsOpen(false)}
           >
-            <Link
-              href="/products"
-              className={`flex items-center gap-1 transition-colors py-2 ${isActive("/products") ? "text-primary font-medium" : "text-foreground/85 hover:text-primary"}`}
-            >
+            <Link href="/products" className={navLinkClass(isActive("/products"))}>
               Products <ChevronDown className="h-3.5 w-3.5" />
             </Link>
             {productsOpen && (
@@ -99,7 +98,7 @@ export function Header() {
                     <Link
                       key={c.slug}
                       href={`/products/${c.slug}`}
-                      className="px-3 py-2 rounded-md text-sm text-foreground/85 hover:bg-muted hover:text-primary transition-colors"
+                      className="px-3 py-2 rounded-md text-sm text-foreground/85 hover:bg-primary/10 hover:text-primary transition-colors"
                     >
                       {c.name}
                     </Link>
@@ -110,24 +109,22 @@ export function Header() {
           </div>
 
           {nav.map((n) => (
-            <Link
-              key={n.to}
-              href={n.to}
-              className={`transition-colors ${isActive(n.to) ? "text-primary font-medium" : "text-foreground/85 hover:text-primary"}`}
-            >
+            <Link key={n.to} href={n.to} className={navLinkClass(isActive(n.to))}>
               {n.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground hover:brightness-105 px-4 py-2.5 text-sm font-semibold shadow-sm transition"
-          >
-            Get a Quote
-          </Link>
-        </div>
+        {!isActive("/contact") && (
+          <div className="hidden lg:flex items-center gap-3">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground hover:brightness-105 px-4 py-2.5 text-sm font-semibold shadow-sm transition"
+            >
+              Get a Quote
+            </Link>
+          </div>
+        )}
 
         <button
           aria-label="Toggle menu"
@@ -144,14 +141,14 @@ export function Header() {
             <Link
               href="/"
               onClick={() => setOpen(false)}
-              className="px-3 py-2.5 rounded-md hover:bg-muted"
+              className={mobileNavLinkClass(isActive("/"))}
             >
               Home
             </Link>
             <Link
               href="/products"
               onClick={() => setOpen(false)}
-              className="px-3 py-2.5 rounded-md hover:bg-muted font-medium"
+              className={mobileNavLinkClass(isActive("/products"), "font-medium")}
             >
               All Products
             </Link>
@@ -161,7 +158,7 @@ export function Header() {
                   key={c.slug}
                   href={`/products/${c.slug}`}
                   onClick={() => setOpen(false)}
-                  className="px-3 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-muted"
+                  className="px-3 py-1.5 rounded-md text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors"
                 >
                   {c.name}
                 </Link>
@@ -172,18 +169,20 @@ export function Header() {
                 key={n.to}
                 href={n.to}
                 onClick={() => setOpen(false)}
-                className="px-3 py-2.5 rounded-md hover:bg-muted"
+                className={mobileNavLinkClass(isActive(n.to))}
               >
                 {n.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
-              onClick={() => setOpen(false)}
-              className="mt-3 inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-4 py-3 text-sm font-semibold"
-            >
-              Get a Quote
-            </Link>
+            {!isActive("/contact") && (
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="mt-3 inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-4 py-3 text-sm font-semibold"
+              >
+                Get a Quote
+              </Link>
+            )}
           </div>
         </div>
       )}

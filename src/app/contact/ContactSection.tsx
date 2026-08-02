@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Phone, Mail, MessageCircle, Send, Loader2 } from "lucide-react";
+import { MapPin, Phone, Mail, Send, Loader2 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
 
 export function ContactSection() {
   const [sent, setSent] = useState(false);
@@ -142,7 +143,7 @@ export function ContactSection() {
             rel="noreferrer"
             className="flex items-center gap-3 p-5 rounded-2xl bg-[#25D366] text-white hover:brightness-110 transition"
           >
-            <MessageCircle className="h-6 w-6" />
+            <WhatsAppIcon className="h-6 w-6" />
             <div>
               <div className="font-semibold">Chat on WhatsApp</div>
               <div className="text-xs opacity-90">Typical reply within minutes</div>
