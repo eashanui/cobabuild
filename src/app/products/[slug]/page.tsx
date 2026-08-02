@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { products } from "@/lib/products";
 import { WhatsAppIcon } from "@/components/site/icons/WhatsAppIcon";
+import { ProductCarousel } from "@/components/site/ProductCarousel";
 
 const applicationIcons: Record<string, LucideIcon> = {
   Sprout,
@@ -196,28 +197,15 @@ export default async function ProductPage({ params }: Props) {
       <section className="section-y bg-card border-y border-border">
         <div className="container-wide">
           <h2 className="font-serif text-3xl mb-8">Related products</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {related.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/products/${p.slug}`}
-                className="group rounded-2xl overflow-hidden bg-background border border-border hover:shadow-lg transition"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={p.image}
-                    alt={p.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="font-serif text-xl">{p.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.tagline}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <ProductCarousel
+            items={related.map((p) => ({
+              slug: p.slug,
+              title: p.name,
+              description: p.tagline,
+              image: p.image,
+            }))}
+            itemClassName="sm:basis-1/2"
+          />
         </div>
       </section>
     </>

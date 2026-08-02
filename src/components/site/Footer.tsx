@@ -55,10 +55,9 @@ export function Footer() {
               { to: "/about", label: "About Us" },
               { to: "/products", label: "Products" },
               { to: "/quality", label: "Quality & Process" },
-              { to: "/why-coco-peat", label: "Why Coco Peat" },
               { to: "/export", label: "Export Markets" },
               { to: "/gallery", label: "Gallery" },
-              { to: "/downloads", label: "Downloads" },
+              { to: "/contact", label: "Contact" },
             ].map((l) => (
               <li key={l.to}>
                 <Link href={l.to} className="hover:text-accent transition-colors">

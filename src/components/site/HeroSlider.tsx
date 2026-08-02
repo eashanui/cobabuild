@@ -33,7 +33,7 @@ export function HeroSlider() {
         />
         ))}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {slides.map((s, i) => (
+        {slides.map((_, i) => (
         <button
             key={i}
             type="button"

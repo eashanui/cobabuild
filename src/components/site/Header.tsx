@@ -18,7 +18,6 @@ const productCategories = [
 const nav = [
   { label: "About", to: "/about" },
   { label: "Quality & Process", to: "/quality" },
-  { label: "Why Coco Peat", to: "/why-coco-peat" },
   { label: "Export", to: "/export" },
   { label: "Gallery", to: "/gallery" },
   { label: "Contact", to: "/contact" },
@@ -116,14 +115,16 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground hover:brightness-105 px-4 py-2.5 text-sm font-semibold shadow-sm transition"
-          >
-            Get a Quote
-          </Link>
-        </div>
+        {!isActive("/contact") && (
+          <div className="hidden lg:flex items-center gap-3">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground hover:brightness-105 px-4 py-2.5 text-sm font-semibold shadow-sm transition"
+            >
+              Get a Quote
+            </Link>
+          </div>
+        )}
 
         <button
           aria-label="Toggle menu"
@@ -173,13 +174,15 @@ export function Header() {
                 {n.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
-              onClick={() => setOpen(false)}
-              className="mt-3 inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-4 py-3 text-sm font-semibold"
-            >
-              Get a Quote
-            </Link>
+            {!isActive("/contact") && (
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="mt-3 inline-flex items-center justify-center rounded-md bg-gold text-gold-foreground px-4 py-3 text-sm font-semibold"
+              >
+                Get a Quote
+              </Link>
+            )}
           </div>
         </div>
       )}

@@ -27,7 +27,7 @@ export default function ContactPage() {
           <div className="rounded-2xl overflow-hidden border border-border h-[420px]">
             <iframe
               title="Coba Peat Lanka Colombo office"
-              src="https://www.google.com/maps?q=Bullers+Road+Colombo+07&output=embed"
+              src="https://www.google.com/maps?q=Coba+Peat+Lanka+(Pvt.)+Ltd&output=embed"
               width="100%"
               height="420"
               loading="lazy"

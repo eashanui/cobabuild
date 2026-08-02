@@ -11,11 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/products",
     "/quality",
-    "/why-coco-peat",
     "/export",
     "/gallery",
     "/contact",
-    "/downloads",
   ];
 
   const productPages = products.map((p) => `/products/${p.slug}`);

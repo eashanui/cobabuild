@@ -40,9 +40,9 @@ export function ProductCard({
   return (
     <Link
       href={`/products/${slug}`}
-      className="group block rounded-2xl overflow-hidden bg-card border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+      className="group flex h-full flex-col rounded-2xl overflow-hidden bg-card border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+      <div className="relative aspect-[4/3] overflow-hidden bg-muted shrink-0">
         <Image
           src={image}
           alt={title}
@@ -50,8 +50,8 @@ export function ProductCard({
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>
-      <div className="p-5">
-        <h3 className="font-serif text-xl">{title}</h3>
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="font-serif text-xl line-clamp-1">{title}</h3>
         <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{description}</p>
         <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent group-hover:gap-2.5 transition-all">
           Explore <ArrowRight className="h-4 w-4" />

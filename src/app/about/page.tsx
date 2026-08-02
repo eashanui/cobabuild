@@ -229,8 +229,6 @@ export default function AboutPage() {
         description="Our team is happy to share production capacity, references and a full company profile."
         primaryLabel="Contact Sales"
         primaryTo="/contact"
-        secondaryLabel="Download Profile"
-        secondaryTo="/downloads"
       />
     </>
   );

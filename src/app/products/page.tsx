@@ -26,8 +26,6 @@ export default function ProductsPage() {
         description="We regularly run custom EC, pH, mix ratios and private-label packaging for buyers across multiple markets. Tell us what you need."
         primaryLabel="Request a Quote"
         primaryTo="/contact"
-        secondaryLabel="Download Catalogue"
-        secondaryTo="/downloads"
       />
     </>
   );
