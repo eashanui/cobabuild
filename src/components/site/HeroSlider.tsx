@@ -2,16 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import heroFactory from "@/assets/hero-factory.jpg";
-import heroProduct from "@/assets/hero-product.jpg";
-import heroTeam from "@/assets/hero-team.jpg";
-import heroAward from "@/assets/hero-award.jpg";
+import heroFactory from "@/assets/hero/cpl-factory.jpg";
+import heroProduct from "@/assets/hero/cpl-products.jpg";
 
 const slides = [
   { src: heroFactory, alt: "Coba Peat Lanka factory floor" },
-  { src: heroProduct, alt: "Premium coco peat blocks" },
-  { src: heroTeam, alt: "The Coba Peat Lanka team" },
-  { src: heroAward, alt: "Coba Peat Lanka receiving an export excellence award" },
+  { src: heroProduct, alt: "Premium coco peat blocks" }
 ];
 
 export function HeroSlider() {

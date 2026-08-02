@@ -14,7 +14,7 @@ import {
   Download,
   ArrowRight,
 } from "lucide-react";
-import factoryImg from "@/assets/factory.jpg";
+import factoryImg from "@/assets/hero/cpl-factory.jpg";
 import {
   StatBlock,
   ProductCard,

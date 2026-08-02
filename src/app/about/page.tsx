@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Wrench, Boxes, FlaskConical, Truck, Sprout, Eye, Target, Compass } from "lucide-react";
-import factoryImg from "@/assets/factory.jpg";
+import factoryImg from "@/assets/hero/cpl-factory.jpg";
 import directorOneImg from "@/assets/directors/D1.png";
 import directorTwoImg from "@/assets/directors/D2.png";
 import directorThreeImg from "@/assets/directors/D3.png";

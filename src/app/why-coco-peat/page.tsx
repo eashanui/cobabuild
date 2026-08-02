@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Droplets, Wind, Leaf, Recycle } from "lucide-react";
-import growBagsImg from "@/assets/grow-bags.jpg";
+import growBagsImg from "@/assets/products/grow-bags.jpeg";
 import { PageHero, CTASection } from "@/components/site/blocks";
 
 export const metadata: Metadata = {
