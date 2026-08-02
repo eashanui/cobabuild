@@ -4,15 +4,7 @@ import { useState } from "react";
 import { ProductCard } from "@/components/site/blocks";
 import { products } from "@/lib/products";
 
-const categories = [
-  "All",
-  "Coco Peat",
-  "Growing Solutions",
-  "Mulch & Substrate",
-  "Coir Crafts",
-  "Erosion Control",
-  "Industrial",
-];
+const categories = ["All", "Coco Peat", "Mulch", "Potting Mix", "Growing Solutions"];
 
 export function ProductsGrid() {
   const [active, setActive] = useState("All");

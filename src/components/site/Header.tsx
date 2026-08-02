@@ -8,16 +8,11 @@ import Image from "next/image";
 import logoAsset from "@/assets/logo_transparant.png";
 
 const productCategories = [
-  { name: "Coco Peat Blocks", slug: "coco-peat-blocks" },
-  { name: "Coco Peat Briquettes", slug: "coco-peat-briquettes" },
+  { name: "Mulch Block", slug: "mulch-block" },
+  { name: "Potting Mix", slug: "potting-mix" },
   { name: "Grow Bags", slug: "grow-bags" },
-  { name: "Husk Chips & Mulch", slug: "husk-chips" },
-  { name: "PNG Mix Blocks", slug: "png-mix-blocks" },
-  { name: "Coir Pots & Hanging Baskets", slug: "coir-pots" },
-  { name: "Coir Discs", slug: "coir-discs" },
-  { name: "Geotextiles & Geo Logs", slug: "geotextiles" },
-  { name: "Coba Living Dolls", slug: "living-dolls" },
-  { name: "Activated Carbon & Charcoal", slug: "activated-carbon" },
+  { name: "Coco Peat Bales", slug: "coco-peat-bales" },
+  { name: "Coco Peat Briquettes", slug: "coco-peat-briquettes" },
 ];
 
 const nav = [

@@ -1,8 +1,16 @@
 import type { StaticImageData } from "next/image";
-import blocks from "@/assets/product-blocks.jpg";
-import husk from "@/assets/product-husk.jpg";
-import fibre from "@/assets/product-fibre.jpg";
-import growbag from "@/assets/product-growbag.jpg";
+import mulchBlockImg from "@/assets/products/mulch-block.jpeg";
+import pottingMixImg from "@/assets/products/potting-mix.jpg";
+import growBagsImg from "@/assets/products/grow-bags.jpeg";
+import cocoPeatBalesImg from "@/assets/products/coco-peat-bales.jpg";
+import cocoPeatBriquettesImg from "@/assets/products/coco-peat-briquettes.jpg";
+
+export type SpecTable = {
+  columns: string[];
+  rows: { label: string; values: string[] }[];
+};
+
+export type Application = { icon: string; label: string };
 
 export type Product = {
   slug: string;
@@ -11,156 +19,199 @@ export type Product = {
   tagline: string;
   image: StaticImageData;
   description: string;
-  specs: { label: string; value: string }[];
+  features: string[];
+  usage?: string;
+  applications: Application[];
+  specs: SpecTable;
+  packagingNote?: string;
 };
 
 export const products: Product[] = [
   {
-    slug: "coco-peat-blocks",
-    name: "Coco Peat Blocks",
-    category: "Coco Peat",
-    tagline: "High EC & Low EC compressed blocks for horticulture",
-    image: blocks,
+    slug: "mulch-block",
+    name: "Mulch Block",
+    category: "Mulch",
+    tagline: "Concentrated coir mulch with slow-release fertilizer, feeds plants for up to 4 months",
+    image: mulchBlockImg,
     description:
-      "Premium washed and unwashed coco peat compressed into convenient blocks. Available in multiple grades and weights for nurseries, greenhouses and hydroponic systems. Excellent water retention with a stable, near-neutral pH.",
-    specs: [
-      { label: "Weights", value: "4.5kg, 5kg, 6kg, 25kg" },
-      { label: "Grades", value: "High EC, Low EC, Buffered" },
-      { label: "EC", value: "< 0.5 mS/cm (washed)" },
-      { label: "pH", value: "5.5 – 6.5" },
-      { label: "Moisture", value: "< 18%" },
-      { label: "Packaging", value: "Shrink-wrapped, 20'/40' FCL" },
+      "Coba Peat & Mulch Block is a concentrated, premium grade coir mulch containing Nitrophoska slow-release fertilizer. Coir is an ideal mulch because it helps plants stay moist in hot weather while keeping the soil temperature warmer in cold months. It has a high water-holding capacity, so once it takes in water it holds it around shrubs, plants and garden beds for longer.",
+    features: [
+      "Feeds plants for up to 4 months",
+      "Improves soil structure",
+      "Easy to re-wet",
+      "Saves water",
+      "Keeps roots warm in winter and cool in summer",
     ],
+    usage:
+      "Place the block in a wheelbarrow, slowly add around 30 litres of water and allow it to rehydrate. Once expanded, simply pull it apart and it's ready to apply.",
+    applications: [
+      { icon: "Sprout", label: "Producers of growing media" },
+      { icon: "Flower2", label: "As a potting mix" },
+      { icon: "Layers", label: "As a soil conditioner" },
+      { icon: "Leaf", label: "Seedling nurseries / seed-raising substrate" },
+      { icon: "Trophy", label: "Golf course & sports field construction" },
+      { icon: "TreePine", label: "Lawns, nurseries & landscaping" },
+    ],
+    specs: {
+      columns: ["Easy Wetta Mulch", "Feed & Mulch", "Mega Feed & Mulch"],
+      rows: [
+        { label: "Block Dimension (cm)", values: ["28 x 28 x 14", "28 x 28 x 14", "28 x 28 x 18"] },
+        { label: "Block Weight (kg)", values: ["4.1", "4.1", "6.5"] },
+        { label: "Compression Ratio", values: ["5:1", "5:1", "5:1"] },
+        { label: "Volume After Expansion", values: ["60 Ltr", "65 Ltr", "90 Ltr"] },
+        { label: "Blocks per Pallet", values: ["244", "244", "154"] },
+        { label: "Pallets per 40' FCL", values: ["40", "40", "40"] },
+        { label: "Blocks per 40' FCL", values: ["5,040", "5,120", "3,840"] },
+        { label: "M/Tons per 40' FCL", values: ["20.664", "20.992", "24.960"] },
+      ],
+    },
+    packagingNote:
+      "Individually shrink-wrapped with customer's labels, stacked on treated wooden pallets and wrapped with stretch film.",
+  },
+  {
+    slug: "potting-mix",
+    name: "Potting Mix",
+    category: "Potting Mix",
+    tagline: "Premium & organic coir blends for all indoor and outdoor growing",
+    image: pottingMixImg,
+    description:
+      "Coba Potting Mix — Premium Coir Blend has been engineered from one of nature's cleanest creations, the coconut. This ultra-lightweight mix is soil-free and bark-free and does not go through a composting process — a clean, safe, 100% organic growing media for all containers, and safer to use in home garden applications. Coba Potting Mix — Organic Coir Blend has been expertly blended using 100% organic ingredients. This pH-balanced formula is of premium quality with air-filled porosity, suitable for run-to-waste and recycling systems, eliminating harmful environmental disposal issues, and suitable for use in all indoor and outdoor growing.",
+    features: [
+      "Saves water",
+      "Suitable for all outdoor and indoor hydroponic applications",
+      "Easy to re-wet",
+      "Less risk of harmful bacteria and fungi than other potting mixes",
+      "100% natural and environmentally safe",
+    ],
+    usage:
+      "Place the block in a wheelbarrow, slowly add around 30 litres of water and allow it to expand into potting mix. Once expanded, simply pull it apart and it's ready to use.",
+    applications: [
+      { icon: "Home", label: "Indoor and outdoor growing" },
+      { icon: "Package", label: "Hanging baskets" },
+      { icon: "Palmtree", label: "Growing tropical plants" },
+      { icon: "Flower2", label: "Roses and cut flowers" },
+      { icon: "Flower", label: "Orchids" },
+      { icon: "Sprout", label: "Potted plants" },
+    ],
+    specs: {
+      columns: ["1.00 Kg", "2.5 Kg + 50g", "4.1 Kg + 100g"],
+      rows: [
+        { label: "Compression Ratio", values: ["5:1", "5:1", "5:1"] },
+        { label: "Dimension (cm)", values: ["21 x 14 x 9", "28 x 28 x 7", "28 x 28 x 14"] },
+        { label: "Volume After Expansion", values: ["15 Ltr", "30 Ltr", "60 Ltr"] },
+        { label: "Blocks per Pallet", values: ["930", "256", "126"] },
+        { label: "Pallets per 40' FCL", values: ["40", "40", "40"] },
+        { label: "Blocks per 40' FCL", values: ["18,600", "10,240", "5,040"] },
+        { label: "M/Tons per 40' FCL", values: ["18.600", "20.992", "20.664"] },
+      ],
+    },
+    packagingNote:
+      "As per buyers' requirements, labeling can be arranged with their brand names, including their company details.",
+  },
+  {
+    slug: "grow-bags",
+    name: "Grow Bags",
+    category: "Growing Solutions",
+    tagline: "Ready-to-plant growing container and media in one, for greenhouse & nursery production",
+    image: growBagsImg,
+    description:
+      "This innovative product provides a growing container and media in one. Available as Nature Grow Bag, Tomato Grow Bag, Normal Grow Bag, Carnation Bag and Naked Grow Slab (no bag). Normal Grow Bags are also available in custom dimensions of 110 x 15 x 2.5cm (expanding to 110 x 15 x 7.5cm) and 100 x 20 x 2.5cm (expanding to 100 x 20 x 7.5cm), and can vary by number of drainage or planting holes, with or without buffering.",
+    features: [
+      "Labour & time saving",
+      "Easier to break up",
+      "Provides a more efficient and productive, hygienic growing environment",
+      "Combines growing container & media in one product",
+    ],
+    applications: [
+      { icon: "Sprout", label: "As a growing media for plants" },
+      { icon: "Warehouse", label: "As a potting mix in nurseries" },
+      { icon: "Building2", label: "Greenhouse cultivation of tomatoes, chilies, cucumbers & strawberries" },
+      { icon: "Flower2", label: "Roses, gerberas & carnations" },
+    ],
+    specs: {
+      columns: ["Nature Grow", "Tomato Grow Bag", "Normal Grow Bag", "Carnation Bag", "Naked Grow Slab (no bag)"],
+      rows: [
+        { label: "Weight", values: ["865g + 50g", "1 kg", "2.5kg + 100g", "2.5 kg", "800g + 50g"] },
+        { label: "Compression Ratio", values: ["5:1", "5:1", "5:1", "5:1", "5:1"] },
+        { label: "Dimension (cm)", values: ["25 x 18 x 5", "25 x 20 x 6", "110 x 15 x 4", "100 x 20 x 4", "25 x 20 x 4"] },
+        { label: "Expansion (cm)", values: ["25 x 18 x 18", "25 x 20 x 18", "110 x 15 x 15", "100 x 20 x 15", "20 x 25 x 15"] },
+        { label: "Blocks per Pallet", values: ["560", "400", "210", "200", "530"] },
+        { label: "Pallets per 40' FCL", values: ["40", "40", "40", "40", "40"] },
+        { label: "Blocks per 40' FCL", values: ["22,400", "16,000", "8,400", "8,000", "21,200"] },
+        { label: "M/Tons per 40' FCL", values: ["19.376", "14.400", "21.000", "20.000", "16.960"] },
+      ],
+    },
+    packagingNote:
+      "Printing on bags: as per buyers' requirements, labeling can be arranged with their brand names, including their company details.",
+  },
+  {
+    slug: "coco-peat-bales",
+    name: "Coco Peat Bales",
+    category: "Coco Peat",
+    tagline: "Hard-compressed coco peat blocks for maximum container loadability",
+    image: cocoPeatBalesImg,
+    description:
+      "Coco Peat Bales (Blocks) are our most common and popular block form, hard-compressed so a maximum weight can be loaded per container.",
+    features: [
+      "Pressure moulded using modern technology",
+      "Non-toxic, natural & environmentally friendly",
+      "Tightly compressed and therefore subject to considerable expansion in water",
+      "Free of pathogenic bacteria through heat treatment",
+      "Free of added chemical pollutants",
+      "Free of weeds & seeds",
+      "High retention of moisture, nutrients & oxygen for enhanced aeration",
+      "Economical",
+    ],
+    applications: [
+      { icon: "Sprout", label: "As a growing media for plants" },
+      { icon: "Warehouse", label: "As a potting mix in nurseries" },
+      { icon: "TreePine", label: "Ideal for commercial gardens" },
+      { icon: "Landmark", label: "Ideal for landscaping & turfing" },
+    ],
+    specs: {
+      columns: ["4.5 Kg + 100g", "5 Kg + 100g", "25 Kg + 200g"],
+      rows: [
+        { label: "Compression Ratio", values: ["5:1", "5:1", "2:1"] },
+        { label: "Yield", values: ["60 – 65 Ltr", "70 – 75 Ltr", "300 – 350 Ltr"] },
+        { label: "Block Dimension", values: ["28 x 28 x 14 cm", "28 x 28 x 14 cm", "33 x 44 x 80 cm"] },
+        { label: "Loadability per Pallet", values: ["267 Blocks", "256 Blocks", "No Pallets"] },
+        { label: "Pallets per 1x40' FCL", values: ["20", "20", "NIL (loosely packed)"] },
+        { label: "Total Bales per 1x40' FCL", values: ["5,360", "4,480", "665"] },
+        { label: "Total M/Tons per 1x40' FCL", values: ["24.12", "22.40", "16.6"] },
+      ],
+    },
   },
   {
     slug: "coco-peat-briquettes",
     name: "Coco Peat Briquettes",
     category: "Coco Peat",
-    tagline: "Compact briquettes for retail and small-scale growers",
-    image: blocks,
+    tagline: "Highly compressed briquettes, available with or without fertilizer",
+    image: cocoPeatBriquettesImg,
     description:
-      "Convenient, hand-friendly briquettes that expand up to 8x in water. Ideal for home gardening, retail packaging and propagation.",
-    specs: [
-      { label: "Weights", value: "650g, 330g" },
-      { label: "Expansion", value: "Up to 8 litres / 650g" },
-      { label: "EC", value: "< 0.5 mS/cm" },
-      { label: "pH", value: "5.5 – 6.5" },
-      { label: "Packaging", value: "Individual or bulk" },
+      "Coba Peat Briquettes are highly compressed and therefore subject to considerable expansion in water. For this reason they should be placed in a container large enough to accommodate the expansion on contact with water.",
+    features: [
+      "Highly compressed, subject to considerable expansion in water",
+      "Should be placed in a container large enough to accommodate expansion",
+      "Available with or without fertilizer",
     ],
-  },
-  {
-    slug: "grow-bags",
-    name: "Grow Bags & Nature Grow Bags",
-    category: "Growing Solutions",
-    tagline: "Open-top grow bags for tomatoes, cucumbers and soft fruits",
-    image: growbag,
-    description:
-      "Ready-to-plant coco peat grow bags engineered for commercial greenhouse production. Our Nature Grow Bags use a low-impact, biodegradable outer sleeve.",
-    specs: [
-      { label: "Standard sizes", value: "100x20x15cm, 100x18x10cm" },
-      { label: "Mix", value: "70/30, 50/50, 30/70 (peat/chips)" },
-      { label: "Drainage", value: "Pre-cut drainage slits" },
-      { label: "Variants", value: "Standard & Nature Grow Bags" },
+    applications: [
+      { icon: "Sprout", label: "As a growing media for plants" },
+      { icon: "Warehouse", label: "As a potting mix in nurseries" },
+      { icon: "TreePine", label: "Ideal for commercial gardens" },
+      { icon: "Landmark", label: "Ideal for landscaping & turfing" },
     ],
-  },
-  {
-    slug: "husk-chips",
-    name: "Husk Chips & Mulch",
-    category: "Mulch & Substrate",
-    tagline: "Coco fibre chip bales for orchids, mulch and substrate mixes",
-    image: husk,
-    description:
-      "Coarse coconut husk chips for excellent aeration and drainage. Suitable for orchids, anthuriums, and ornamental landscaping.",
-    specs: [
-      { label: "Chip size", value: "10–25mm" },
-      { label: "Bale weight", value: "5kg compressed" },
-      { label: "EC", value: "< 0.5 mS/cm" },
-      { label: "Moisture", value: "< 18%" },
-    ],
-  },
-  {
-    slug: "png-mix-blocks",
-    name: "PNG Mix Blocks",
-    category: "Coco Peat",
-    tagline: "Premium custom-blended substrate blocks",
-    image: blocks,
-    description:
-      "Custom-blended coco peat and chip mix engineered to client specifications. Popular with Pacific market growers.",
-    specs: [
-      { label: "Mix ratio", value: "Custom 70/30, 60/40, 50/50" },
-      { label: "Block size", value: "5kg standard" },
-      { label: "Treatment", value: "Washed / buffered options" },
-    ],
-  },
-  {
-    slug: "coir-pots",
-    name: "Coir Pots & Hanging Baskets",
-    category: "Coir Crafts",
-    tagline: "Biodegradable plant pots and liners",
-    image: fibre,
-    description:
-      "Handcrafted coir pots and hanging basket liners. Fully biodegradable, ideal for nursery transplants and decorative landscaping.",
-    specs: [
-      { label: "Sizes", value: '4", 6", 8", 10", 12", 14"' },
-      { label: "Material", value: "100% natural coir fibre" },
-      { label: "Lifespan", value: "12–24 months outdoor" },
-    ],
-  },
-  {
-    slug: "coir-discs",
-    name: "Coir Discs",
-    category: "Coir Crafts",
-    tagline: "Compressed seed-starting and propagation discs",
-    image: husk,
-    description:
-      "Compressed coir discs expand into convenient growing plugs. Perfect for propagation trays and seed-starting kits.",
-    specs: [
-      { label: "Diameters", value: "30mm, 35mm, 42mm, 50mm" },
-      { label: "Expansion", value: "5–6x original height" },
-      { label: "Mesh wrap", value: "Biodegradable or netted" },
-    ],
-  },
-  {
-    slug: "geotextiles",
-    name: "Geotextiles & Geo Logs",
-    category: "Erosion Control",
-    tagline: "Erosion-control textiles for slopes and shorelines",
-    image: fibre,
-    description:
-      "Woven coir geotextiles and biologs provide sustainable erosion control for slopes, riverbanks, and restoration projects.",
-    specs: [
-      { label: "Weights", value: "400 / 700 / 900 gsm" },
-      { label: "Roll size", value: "1m / 2m / 4m widths" },
-      { label: "Geo Log diameter", value: "200mm, 300mm, 400mm" },
-    ],
-  },
-  {
-    slug: "living-dolls",
-    name: "Coba Living Dolls",
-    category: "Coir Crafts",
-    tagline: "Decorative fibre figures that sprout grass",
-    image: fibre,
-    description:
-      "Charming handmade coir-fibre figures with embedded seeds. A playful retail product that brings nature into the home.",
-    specs: [
-      { label: "Sizes", value: "Mini, Standard, Large" },
-      { label: "Material", value: "Coir fibre, seed paper" },
-      { label: "Shelf life", value: "12 months packaged" },
-    ],
-  },
-  {
-    slug: "activated-carbon",
-    name: "Activated Carbon & Charcoal",
-    category: "Industrial",
-    tagline: "Coconut-shell activated carbon for filtration",
-    image: husk,
-    description:
-      "High-grade activated carbon and charcoal derived from coconut shells. Used in water treatment, air filtration, and industrial purification.",
-    specs: [
-      { label: "Iodine value", value: "900 – 1100 mg/g" },
-      { label: "Mesh sizes", value: "4x8, 6x12, 8x30, 12x40" },
-      { label: "Moisture", value: "< 5%" },
-    ],
+    specs: {
+      columns: ["650g + 50g"],
+      rows: [
+        { label: "Dimension", values: ["20 x 10 x 5 cm"] },
+        { label: "Compression Ratio", values: ["8:1"] },
+        { label: "Yield", values: ["9 Ltr"] },
+        { label: "Loadability", values: ["40 pallets per 1x40' FCL (approx. 38,400 blocks per FCL)"] },
+        { label: "Total Weight per 1x40' FCL", values: ["24.12 M/Tons"] },
+      ],
+    },
+    packagingNote:
+      "Packed either as (1) unwrapped briquettes stacked on treated wooden pallets and wrapped with stretch film, or (2) blocks individually shrink-wrapped with labels, stacked on treated wooden pallets and wrapped with stretch film.",
   },
 ];
 
@@ -171,27 +222,27 @@ export const productCategoryGrid: {
   slug: string;
 }[] = [
   {
-    title: "Coco Peat Blocks & Briquettes",
-    description: "Compressed blocks, briquettes and PNG mix in multiple grades.",
-    image: blocks,
-    slug: "coco-peat-blocks",
+    title: "Coco Peat Bales & Briquettes",
+    description: "Hard-compressed blocks and highly compressed briquettes in multiple weights.",
+    image: cocoPeatBalesImg,
+    slug: "coco-peat-bales",
   },
   {
-    title: "Grow Bags & Planters",
-    description: "Open-top and Nature Grow Bags for commercial greenhouses.",
-    image: growbag,
+    title: "Mulch Block",
+    description: "Slow-release fertilizer mulch blocks that feed plants for up to 4 months.",
+    image: mulchBlockImg,
+    slug: "mulch-block",
+  },
+  {
+    title: "Potting Mix",
+    description: "Premium & organic coir blends for indoor and outdoor growing.",
+    image: pottingMixImg,
+    slug: "potting-mix",
+  },
+  {
+    title: "Grow Bags",
+    description: "Ready-to-plant grow bags for greenhouse tomatoes, cucumbers and soft fruits.",
+    image: growBagsImg,
     slug: "grow-bags",
-  },
-  {
-    title: "Husk Chips & Mulch",
-    description: "Coarse husk chips and fibre chip bales for aeration.",
-    image: husk,
-    slug: "husk-chips",
-  },
-  {
-    title: "Fibre & Coir Crafts",
-    description: "Coir pots, discs, geotextiles and living dolls.",
-    image: fibre,
-    slug: "coir-pots",
   },
 ];

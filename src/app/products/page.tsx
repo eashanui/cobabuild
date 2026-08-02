@@ -5,7 +5,7 @@ import { ProductsGrid } from "./ProductsGrid";
 export const metadata: Metadata = {
   title: "Products | Coco Peat, Grow Bags & Coir",
   description:
-    "Browse our full range of coco peat blocks, briquettes, grow bags, husk chips, coir pots, geotextiles and more all manufactured in Sri Lanka and exported worldwide.",
+    "Browse our full range of mulch blocks, potting mix, grow bags, coco peat bales and briquettes, all manufactured in Sri Lanka and exported worldwide.",
   openGraph: { title: "Products | Coba Peat Lanka", url: "/products" },
   alternates: { canonical: "/products" },
 };
